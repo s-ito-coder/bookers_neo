@@ -1,35 +1,41 @@
 <h2>userinfo</h2>
-<img class="attachment user profile_image fallback" src="/assets/no_image-ede28af4bad96368ef41be1b4be1cffce0d9402540f75d17895e32cb0d2af5e6.jpg" alt="No image">
+
 
 <table class="table">
-      <tbody><tr></tr>
+      <tbody>
+        <tr><div class="user-edit-image">
+          <%= attachment_image_tag @user, :profile_image, :fill, 60, 60, format: 'jpeg', class: "img-circle pull-left profile-img", fallback: "no_image.jpg" %>
+      　</div></tr>
       <tr>
         <th>name</th>
-        <th>ここに名前が入る</th>
+        <th><%= current_user.name %></th>
       </tr>
       <tr>
         <th>introduction</th>
-        <th></th>
+        <th><%= current_user.introduction %></th>
       </tr>
 </tbody></table>
 
 <div class="row">
-  <a class="col-xs-12 btn btn-default glyphicon glyphicon-wrench edit_user_11658" href="/users/11658/edit"></a>
+  <%= link_to "",edit_user_path(current_user.id), class: "col-xs-12 btn btn-default glyphicon glyphicon-wrench edit_user" %>
 </div>
 
-<h2>New book</h2>
-<form class="new_book" id="new_book" action="/books" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="✓"><input type="hidden" name="authenticity_token" value="5394ERRhdSSyMeBKRO2blf1FokkKbkuTqUUa0As6O844CXobKsDw/TE3JMLyQPdbEjl+dd2gt+FAg5ySseJuTA==">
-  <div class="field row">
-    <label for="book_title">Title</label>
-    <input class="col-xs-12 book_title" type="text" name="book[title]" id="book_title">
-  </div>
 
-  <div class="field row">
-    <label for="book_opinion">Opinion</label>
-    <textarea class="col-xs-12 book_body" name="book[body]" id="book_body"></textarea>
-  </div>
+<%= form_for(@book) do |f| %>
+  <h2>New book</h2>
+      <div class="field row">
+        <label for="book_title">Title</label>
+        <input class="col-xs-12 book_title" type="text" name="book[title]" id="book_title">
+      </div>
 
-  <div class="actions row">
-    <input type="submit" name="commit" value="Create Book" class="btn btn-primary col-xs-12" data-disable-with="Create Book">
-  </div>
+      <div class="field row">
+        <label for="book_opinion">Opinion</label>
+        <textarea class="col-xs-12 book_body" name="book[body]" id="book_body"></textarea>
+      </div>
+
+      <div class="actions row">
+        <%= f.submit 'Create Book' %>
+        <!-- class="btn btn-primary col-xs-12"  -->
+      </div>
+<% end %>
 </form>

@@ -18,7 +18,7 @@
         <ul class="nav navbar-nav navbar-right">
           <% if user_signed_in? %>
             <li>
-              <%= link_to " Home",user_path(@user.id), class: "glyphicon glyphicon-home home" %>
+              <%= link_to " Home",user_path(current_user.id), class: "glyphicon glyphicon-home home" %>
             </li>
             <li>
               <%= link_to " Users",users_path, class: "glyphicon glyphicon-user users" %>
@@ -34,8 +34,7 @@
               <%= link_to " Home",root_path, class: "glyphicon glyphicon-home home" %>
             </li>
             <li>
-              <%= link_to " Home",root_path, class: "glyphicon glyphicon-link about" %>
-              <a class="glyphicon glyphicon-link about" href="/home/about"> About</a>
+              <%= link_to " About",root_path, class: "glyphicon glyphicon-link about" %>
             </li>
             <li>
               <a class="glyphicon glyphicon-edit sign_up" href="/users/sign_up"> sign up</a>
