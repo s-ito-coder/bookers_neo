@@ -1,25 +1,26 @@
 <div class="container">
 	<div class="col-xs-3">
-		<%= render 'users/prof', user: @user %>
+		<%= render 'users/prof', user: @user, book: @book %>
 	</div>
 	<div class="col-xs-9">
 		<h2>Books</h2>
 		<table class="table table-hover table-inverse">
 			<thead>
 				<tr>
-					<th>　</th>
+					<th><attachment_image_tag user></th>
 					<th>Title</th>
 					<th>Opinion</th>
 				</tr>
 			</thead>
+
 			<tbody>
-				<tr>
-			        <% @books.each do |books| %>
-			        	<td></td><!-- <td>ここにプロフィールイメージ</td> -->
-			        	<td><%= books.title %></td>
-			        	<td><%= books.body %></td>
-			        <% end %>
-			    </tr>
+			    <% @books.each do |bks| %>
+				    <tr>
+			        	<td><%= attachment_image_tag bks.user, :profile_image, :fill, 40, 40, format: 'jpeg', class: "img-circle pull-left profile-img", fallback: "no_image.jpg" %></td>
+			        	<td><%= bks.title %></td>
+			        	<td><%= bks.body %></td>
+				    </tr>
+			    <% end %>
 		    </tbody>
 		</table>
 	</div>

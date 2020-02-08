@@ -1,10 +1,15 @@
-<h2>userinfo</h2>
+<% if flash[:notice] %>
+  <div class="flash">
+    <%= flash[:notice] %>
+  </div>
+<% end %>
 
+<h2>userinfo</h2>
 
 <table class="table">
       <tbody>
         <tr><div class="user-edit-image">
-          <%= attachment_image_tag @user, :profile_image, :fill, 60, 60, format: 'jpeg', class: "img-circle pull-left profile-img", fallback: "no_image.jpg" %>
+          <%= attachment_image_tag user, :profile_image, :fill, 60, 60, format: 'jpeg', class: "img-circle pull-left profile-img", fallback: "no_image.jpg" %>
       　</div></tr>
       <tr>
         <th>name</th>
@@ -21,21 +26,20 @@
 </div>
 
 
-<%= form_for(@book) do |f| %>
+<%= form_for(book) do |f| %>
   <h2>New book</h2>
       <div class="field row">
         <label for="book_title">Title</label>
-        <input class="col-xs-12 book_title" type="text" name="book[title]" id="book_title">
+        <%= f.text_field :title, class: "col-xs-12" %>
       </div>
 
       <div class="field row">
         <label for="book_opinion">Opinion</label>
-        <textarea class="col-xs-12 book_body" name="book[body]" id="book_body"></textarea>
+        <%= f.text_area :body, class: "col-xs-12" %>
       </div>
 
       <div class="actions row">
-        <%= f.submit 'Create Book' %>
-        <!-- class="btn btn-primary col-xs-12"  -->
+        <%= f.submit 'Create Book', class: "btn btn-primary col-xs-12" %>
       </div>
 <% end %>
 </form>

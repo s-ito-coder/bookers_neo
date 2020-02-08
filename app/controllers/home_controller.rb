@@ -1,6 +1,5 @@
 class HomeController < ApplicationController
   def index
-	@user = User.find(current_user.id)
   end
 
   def show
@@ -8,5 +7,10 @@ class HomeController < ApplicationController
   end
 
   def about
+  end
+
+  private
+  def user_before_action?
+  	false
   end
 end
