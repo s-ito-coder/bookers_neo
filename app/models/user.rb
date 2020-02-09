@@ -7,4 +7,5 @@ class User < ApplicationRecord
   has_many :prof_images, dependent: :destroy
   attachment :profile_image
   validates :introduction,    length: { maximum: 50 }
+  validates :name,    length: { in: 2..20 }
 end

@@ -1,4 +1,7 @@
 class BooksController < ApplicationController
+    before_action :authenticate_user!
+    before_action :correct_user, only: [:edit, :update]
+
     def new
         @book = Book.new
     end
@@ -11,7 +14,8 @@ class BooksController < ApplicationController
             flash[:notice] = "Book was successfully created."
             redirect_to book_path(@book)
         else
-            render template: "users/show"
+            @user = User.find(current_user.id)
+            render :index
         end
     end
 
@@ -30,14 +34,17 @@ class BooksController < ApplicationController
     end
 
     def edit
+        @user = User.find(current_user.id)
         @book = Book.find(params[:id])
     end
 
     def update
-        if book.update(user_params)
+        book = Book.find(params[:id])
+        if book.update(book_params)
             flash[:notice] = "Book was successfully updated."
-            redirect_to user_path(current_user.id)
+            redirect_to book_path(params[:id])
         else
+            @book = book
             render :edit
         end
     end
@@ -46,7 +53,8 @@ class BooksController < ApplicationController
         book = Book.find(params[:id])
         book.destroy
         flash[:notice] = "Book was successfully destroyed."
-        redirect_to book_path(current_user.id)
+        @book = Book.new
+        redirect_to books_path
     end
 
     private
@@ -54,4 +62,10 @@ class BooksController < ApplicationController
         params.require(:book).permit(:title, :body)
     end
 
+    def correct_user
+      book = Book.find(params[:id])
+      if book.user.id != current_user.id
+         redirect_to books_path
+      end
+    end
 end

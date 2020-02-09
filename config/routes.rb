@@ -5,6 +5,6 @@ Rails.application.routes.draw do
   resources :post_images, only: [:new, :create, :index, :show]
   root to: 'home#index'
   get "home/about" => "home#about"
-  post "books/:id/destroy" => "books#destroy"
+  delete "books/:id" => "books#destroy"
   post "books/:id/edit" => "books#edit"
 end

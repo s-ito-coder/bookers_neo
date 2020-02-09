@@ -1,8 +1,32 @@
 <div class="container">
-	<div class="col-xs-3">
-		<%= render 'users/prof', user: @user, book: @book %>
-	</div>
-	<div class="col-xs-9">
-		<p>aiueo</p>
+	<div class="row">
+		<div class="col-xs-3">
+			<%= render 'users/prof', user: @user, book: @book %>
+		</div>
+		<div class="col-xs-9">
+			<h2>Users</h2>
+			<table class="table table-hover table-inverse">
+				<thead>
+					<tr>
+						<th>image</th>
+						<th>name</th>
+						<th></th>
+					</tr>
+				</thead>
+
+				<tbody>
+				    <% @users.each do |urs| %>
+					    <tr>
+				        	<td><%= attachment_image_tag urs, :profile_image, :fill, 40, 40, format: 'jpeg', class: "img-circle pull-left profile-img", fallback: "no_image.jpg", size:'40x40' %></td>
+				        	<td><%= urs.name %></td>
+				        	<td><%= link_to urs do %>
+				        			Show
+				        		<% end %>
+				        	</td>
+					    </tr>
+				    <% end %>
+			    </tbody>
+			</table>
+		</div>
 	</div>
 </div>

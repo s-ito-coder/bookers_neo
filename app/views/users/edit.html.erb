@@ -3,7 +3,7 @@
 	<div class="container">
 		<% if @user.errors.any? %>
 		    <div id="error_explanation">
-			    <h2><%= @user.errors.count %>件のエラーが発生しました。</h2>
+			    <h2><%= @user.errors.count %>errors prohibited this obj from being saved</h2>
 			    <ul>
 				    <% @user.errors.full_messages.each do |message| %>
 					    <li><%= message %></li>
@@ -18,8 +18,7 @@
 
   <div class="field">
     <label for="user_name">Name</label>
-
-    <input class="name" type="text" value="booktest" name="user[name]" id="user_name">
+	<%= f.text_field :name %>
   </div>
 
   <div class="field">
